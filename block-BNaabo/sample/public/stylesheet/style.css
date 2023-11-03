@@ -1,6 +1,11 @@
+body {
+  background-color: black;
+  text-align: center;
+  color: white;
+}
 .container {
   width: 1200px;
-  border: 2px double black;
+  border: 2px double white;
   padding: 10px;
   margin: 0 auto;
   text-align: center;
