@@ -14,9 +14,7 @@ app.get("/", (req, res) => {
 app.get("/new", (req, res) => {
   res.sendFile(__dirname + "/new.html");
 });
-app.post("/new", (req, res) => {
-  res.json();
-});
+
 app.get("/users/:username", (req, res) => {
   var username = req.params.username;
   res.send(username);
