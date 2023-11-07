@@ -2,17 +2,17 @@ var express = require("express");
 var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 
+var app = express();
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(logger("dev"));
 
 app.use(cookieParser());
 
 app.use((req, res, next) => {
-  req.cookies("username", "assign");
-  res.send("all about");
+  res.cookie("username", "assign");
+  next();
 });
-var app = express();
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 app.get("/", (req, res) => {
   res.setHeader("content-type", "text/html");
@@ -23,16 +23,17 @@ app.get("/about", (req, res) => {
   res.send("My name is qwerty");
 });
 
-app.get("/users/:username", (req, res) => {
-  var username = req.params.username;
-  res.send(username);
-});
 app.post("/form", (req, res) => {
-  res.send(req.body);
+  res.json(req.body);
 });
 
 app.post("/json", (req, res) => {
   res.send(req.body);
+});
+
+app.get("/users/:username", (req, res) => {
+  var username = req.params.username;
+  res.send(`<h2>${username}</h2>`);
 });
 
 app.use((req, res, next) => {
